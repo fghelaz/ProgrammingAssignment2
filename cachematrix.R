@@ -22,5 +22,32 @@ makeCacheMatrix <- function(x = matrix()) {
         
         ## Return cachedmatrix class type with a list of methods
         list(set = set, get = get, setinverse = setinverse, getinverse = 
-                     getinverse)
+                                                            getinverse)
+}
+
+
+## Return inverse of cachedmatrix x and check cache if available. 
+
+cacheSolve <- function(x, ...) {
+        
+        ## Get inv value from makeCacheMatrix function
+        inv <- x$getinverse()
+        
+        ## Check if matrix has already been cached
+        if(!is.null(inv)) {
+                message("You`re using astr cached matrix.")
+                return(inv)
+        }
+        
+        ## Get matrix from makeCacheMatrix
+        data <- x$get()
+        
+        ## Solve matrix inverse
+        inv <- solve(data, ...)
+        
+        ## Set cache matrix inverse
+        x$setinverse(inv)
+        
+        ## Return inverse matrix
+        inv
 }
