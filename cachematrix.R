@@ -56,7 +56,7 @@ cacheSolve <- function(x, ...) {
         
         ## Check if matrix has already been cached
         if(!is.null(inv)) {
-                message("You`re using astr cached matrix.")
+                message("You`re using a cached matrix.")
                 return(inv)
         }
         
