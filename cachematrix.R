@@ -1,4 +1,22 @@
 
+## Create a cacheble matrix type. Has the ability to cache the
+## result and look it up in the future to improve performance.
+##---------------------------------------------------------------------------
+## For testing (dicussion forum example):
+## We create a "amatrix" object from class "makeCacheMatrix"
+## amatrix = makeCacheMatrix(matrix(c(1,2,3,4), nrow=2, ncol=2))
+## amatrix$get()         # Method that returns original matrix
+## cacheSolve(amatrix)   # Computes, caches, and returns    matrix inverse
+## amatrix$getinverse()  # Returns matrix inverse
+## cacheSolve(amatrix)   # Returns cached matrix inverse using previously 
+# computed matrix inverse
+## amatrix$set(matrix(c(0,5,99,66), nrow=2, ncol=2)) # Modify existing matrix
+## cacheSolve(amatrix)   # Computes, caches, and returns new matrix inverse
+## amatrix$get()         # Returns matrix
+## amatrix$getinverse()  # Returns matrix inverse
+##---------------------------------------------------------------------------
+## Create matrix type.
+
 
 makeCacheMatrix <- function(x = matrix()) {
         
@@ -21,8 +39,11 @@ makeCacheMatrix <- function(x = matrix()) {
         getinverse <- function() {inv}
         
         ## Return cachedmatrix class type with a list of methods
-        list(set = set, get = get, setinverse = setinverse, getinverse = 
+        cachematrix<-list(set = set, get = get, setinverse = setinverse, getinverse = 
                                                             getinverse)
+        class(cachematrix) <- "makeCacheMatrix"
+        
+        cachematrix
 }
 
 
